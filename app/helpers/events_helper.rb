@@ -1,3 +1,3 @@
+include ActsAsTaggableOn::TagsHelper
 module EventsHelper
-  include ActsAsTaggableOn::TagsHelper
 end

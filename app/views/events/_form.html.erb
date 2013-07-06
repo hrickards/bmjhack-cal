@@ -16,21 +16,46 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :teacher %><br>
+    <%= f.text_field :teacher %>
   </div>
   <div class="field">
     <%= f.label :limit %><br>
     <%= f.number_field :limit %>
   </div>
+
   <div class="field">
-    <%= f.label :date %><br>
-    <%= f.datetime_select :date %>
+    <%= f.label :course %><br>
+    <%= f.select :course_list, %w{Medic Nurse}.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
+  <div class="field">
+    <%= f.label :year %><br>
+    <%= f.select :year_list, %w{One Two Three Four Five}.map{|x| [x,x]}, {}, {:multiple => true} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_datetime %><br>
+    <%= f.datetime_select :start_datetime %>
+  </div>
+  <div class="field">
+    <%= f.label :end_datetime %><br>
+    <%= f.datetime_select :end_datetime %>
+  </div>
+
+  <div class="field">
+    <%= f.label :resources %><br>
+    <%= f.text_area :resources %>
+  </div>
+
   <div class="field">
     <%= f.label :tags %><br>
-    <%= f.text_field :tag_list %>
+    <%= f.select :tag_list, %w{A B C D E F G H J K L M N O P Q R S}.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

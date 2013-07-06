@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130706145813) do
+ActiveRecord::Schema.define(version: 20130706164843) do
 
   create_table "appointments", force: true do |t|
     t.integer "user_id"
@@ -20,9 +20,12 @@ ActiveRecord::Schema.define(version: 20130706145813) do
 
   create_table "events", force: true do |t|
     t.string   "title"
-    t.text     "description"
+    t.string   "location"
+    t.string   "teacher"
     t.integer  "limit"
-    t.datetime "date"
+    t.datetime "start_datetime"
+    t.datetime "end_datetime"
+    t.text     "resources"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

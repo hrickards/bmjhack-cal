@@ -8,37 +8,19 @@
   </p>
 <% end %>
 
-<p>
-  <strong>Title:</strong>
-  <%= @event.title %>
-</p>
+<p> <strong>Title:</strong> <%= @event.title %> </p>
+<p> <strong>Location:</strong> <%= @event.location %> </p>
+<p> <strong>Teacher:</strong> <%= @event.teacher %> </p>
+<p> <strong>Limit:</strong> <%= @event.limit %> </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+<p> <strong>Courses:</strong> <%= intersperse @event.course, "," %> </p>
+<p> <strong>Years:</strong> <%= intersperse @event.year, "," %> </p>
 
-<p>
-  <strong>Limit:</strong>
-  <%= @event.limit %>
-</p>
+<p> <strong>Start:</strong> <%= @event.start_datetime %> </p>
+<p> <strong>End:</strong> <%= @event.end_datetime %> </p>
 
-<p>
-  <strong>No. attending:</strong>
-  <%= @event.users.count %>
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @event.date %>
-</p>
-
-<p>
-  <strong>Tags:</strong>
-  <% @event.tags.each do |tag| %>
-    <%= tag.name %>
-  <% end %>
-</p>
+<p> <strong>Resources:</strong> <%= @event.resources %> </p>
+<p> <strong>Tags:</strong> <%= intersperse @event.tags, "," %> </p>
 
 <% if @event.users.include? current_user %>
   <%= link_to 'Leave', leave_event_path(@event) %> |

@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :title, :description, :limit, :date, :tags
+  attr_accessible :title, :location, :teacher, :limit, :course, :year, :start_datetime, :end_datetime, :resources, :tags
 
   has_many :appointments, dependent: :destroy
   has_many :users, through: :appointments
@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   has_many :waitlist_appointments, dependent: :destroy
   has_many :waitlist_users, through: :waitlist_appointments, foreign_key: :event_id, class_name: :User
   
-  acts_as_taggable_on :tags
+  acts_as_taggable_on :tags, :course, :year
 
   after_update :email_changes
   after_update :check_waitlist
@@ -21,9 +21,22 @@ class Event < ActiveRecord::Base
     end
   end
 
+  #http://murmurinfo.wordpress.com/2010/11/26/ical-support-for-rails/
+  def ical
+    e = Icalendar::Event.new
+    e.uid = self.id
+    e.dtstart = self.start_datetime
+    e.dtend = self.end_datetime
+    e.summary = self.title
+    e.created = self.created_at
+    e.location = self.location
+    
+    e
+  end
+
   private
   def get_changes
-    old_attributes = {'title'=>self.title_was, 'description'=>self.description_was, 'limit'=>self.limit_was, 'date'=>self.date_was}
+    old_attributes = {'title'=>self.title_was, 'location'=>self.location_was, 'teacher'=>self.teacher_was, 'limit'=>self.limit_was, 'course'=>self.course_was, 'year'=>self.year_was, 'start_datetime'=>self.start_datetime_was, 'end_datetime'=>self.end_datetime_was, 'resources'=>self.resources_was, 'tags'=>self.tags_was}
     changes = {}
     self.attributes.each_pair do |key, val|
       unless old_attributes[key] == val or key == "created_at" or key == "updated_at" or key == "id"
