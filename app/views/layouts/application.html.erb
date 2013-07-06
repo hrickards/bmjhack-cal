@@ -8,8 +8,13 @@
 
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <p id="notice"><%= notice %></p>
+  <p id="alert"><%= alert %></p>
+  <% if current_user %>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
+  <% end %>
 
 <%= yield %>
 

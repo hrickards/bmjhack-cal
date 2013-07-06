@@ -1,0 +1,45 @@
+<% if @event.users.include? current_user %>
+  <p>
+    You are attending this event
+  </p>
+<% end %>
+
+<p>
+  <strong>Title:</strong>
+  <%= @event.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Limit:</strong>
+  <%= @event.limit %>
+</p>
+
+<p>
+  <strong>No. attending:</strong>
+  <%= @event.users.count %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date %>
+</p>
+
+<p>
+  <strong>Tags:</strong>
+  <% @event.tags.each do |tag| %>
+    <%= tag.name %>
+  <% end %>
+</p>
+
+<% if @event.users.include? current_user %>
+  <%= link_to 'Leave', leave_event_path(@event) %> |
+<% else %>
+  <%= link_to 'Join', join_event_path(@event) %> |
+<% end %>
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

@@ -1,4 +1,11 @@
 Cal2::Application.routes.draw do
+  resources :events do
+    member do
+      get 'join'
+      get 'leave'
+    end
+  end
+
   devise_for :users,  :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   root :to => "home#index"
 

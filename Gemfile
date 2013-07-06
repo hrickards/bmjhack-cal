@@ -46,4 +46,4 @@ end
 gem 'devise', :github => 'plataformatec/devise', :branch => 'rails4'
 gem 'omniauth-google-oauth2'
 gem 'protected_attributes'
-
+gem 'acts-as-taggable-on'
