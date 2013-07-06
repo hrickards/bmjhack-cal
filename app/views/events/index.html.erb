@@ -5,12 +5,12 @@
 <div id="filter">
   <div class="field">
     <%= label :event, :course %><br>
-    <%= select :event, :course_list, COURSES.map{|x| [x,x]}, {}, {:multiple => true} %>
+    <%= select :event, :course_list, COURSES.map{|x| [x,x]}, {:selected => current_user.course}, {:multiple => true} %>
   </div>
 
   <div class="field">
     <%= label :event, :year %><br>
-    <%= select :event, :year_list, YEARS.map{|x| [x,x]}, {}, {:multiple => true} %>
+    <%= select :event, :year_list, YEARS.map{|x| [x,x]}, {:selected => current_user.year}, {:multiple => true} %>
   </div>
 
   <div class="field">

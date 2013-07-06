@@ -7,7 +7,7 @@ Cal2::Application.routes.draw do
     end
   end
 
-  devise_for :users,  :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, :skip => 'sessions' do
+  devise_for :users,  :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }, :skip => 'sessions' do
     delete "/users/sign_out" => "devise/sessions#destroy", :as => :destroy_user_session
   end
 

@@ -1,9 +1,9 @@
 //= require fullcalendar
 
 $(document).ready(function() {
-  window.courses = [];
-  window.years = [];
-  window.tags = [];
+  window.courses = $('#event_course_list').val();
+  window.years = $('#event_year_list').val();
+  window.tags = $('#event_tag_list').val();
 
   $('#calendar').fullCalendar({
     events: function(start, end, callback) {
@@ -40,5 +40,4 @@ $(document).ready(function() {
   function filterResults() {
     $('#calendar').fullCalendar('refetchEvents');
   }
-
 });
