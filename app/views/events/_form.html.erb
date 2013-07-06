@@ -30,11 +30,11 @@
 
   <div class="field">
     <%= f.label :course %><br>
-    <%= f.select :course_list, %w{Medic Nurse}.map{|x| [x,x]}, {}, {:multiple => true} %>
+    <%= f.select :course_list, COURSES.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
   <div class="field">
     <%= f.label :year %><br>
-    <%= f.select :year_list, %w{One Two Three Four Five}.map{|x| [x,x]}, {}, {:multiple => true} %>
+    <%= f.select :year_list, YEARS.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
 
   <div class="field">
@@ -53,7 +53,7 @@
 
   <div class="field">
     <%= f.label :tags %><br>
-    <%= f.select :tag_list, %w{A B C D E F G H J K L M N O P Q R S}.map{|x| [x,x]}, {}, {:multiple => true} %>
+    <%= f.select :tag_list, TAGS.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
 
   <div class="actions">

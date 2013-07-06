@@ -1,11 +1,32 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_filter :check_privileges!, except: [:index, :show, :join, :leave, :leave_waitlist]
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
+
+    unless params[:start].nil? or params[:start].empty? or params[:end].nil? or params[:end].empty?
+      start_datetime = Time.iso8601(params[:start])
+      end_datetime = Time.iso8601(params[:end])
+      @events = @events.where('start_datetime BETWEEN ? AND ?', start_datetime.beginning_of_day, end_datetime.end_of_day)
+    end
+
+    unless params[:courses].nil? or params[:courses].empty?
+      @events = @events.tagged_with(params[:courses], :on => :course, :any => true)
+    end
+
+    unless params[:years].nil? or params[:years].empty?
+      @events = @events.tagged_with(params[:years], :on => :year, :any => true)
+    end
+      
+    unless params[:tags].nil? or params[:tags].empty?
+      @events = @events.tagged_with(params[:tags], :on => :tags, :any => true)
+    end
+    
+    @events = @events.all
 
     respond_to do |format|
       format.html
@@ -122,5 +143,9 @@ class EventsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
       params.require(:event).permit!
+    end
+
+    def check_privileges!
+        redirect_to "/", alert: 'You dont have enough permissions to be here' unless current_user.administrator?
     end
 end

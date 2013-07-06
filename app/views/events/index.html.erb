@@ -1,4 +1,23 @@
-<%= link_to 'New Event', new_event_path %>
+<% if current_user.administrator? %>
+  <%= link_to 'New Event', new_event_path %>
+<% end %>
+
+<div id="filter">
+  <div class="field">
+    <%= label :event, :course %><br>
+    <%= select :event, :course_list, COURSES.map{|x| [x,x]}, {}, {:multiple => true} %>
+  </div>
+
+  <div class="field">
+    <%= label :event, :year %><br>
+    <%= select :event, :year_list, YEARS.map{|x| [x,x]}, {}, {:multiple => true} %>
+  </div>
+
+  <div class="field">
+    <%= label :event, :tags %><br>
+    <%= select :event, :tag_list, TAGS.map{|x| [x,x]}, {}, {:multiple => true} %>
+  </div>
+</div>
 
 <div id="calendar">
 </div>

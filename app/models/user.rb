@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:google_oauth2]
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :course, :year, :administrator
 
   has_many :appointments, dependent: :destroy
   has_many :events, through: :appointments
@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
     unless user
         user = User.create(name: data["name"],
              email: data["email"],
-             password: Devise.friendly_token[0,20]
+             password: Devise.friendly_token[0,20],
+             administrator: false
             )
     end
     user
