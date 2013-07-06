@@ -2,6 +2,10 @@
   <p>
     You are attending this event
   </p>
+<% elsif @event.waitlist_users.include? current_user %>
+  <p>
+    You are on the waiting list to attend this event
+  </p>
 <% end %>
 
 <p>
@@ -38,6 +42,8 @@
 
 <% if @event.users.include? current_user %>
   <%= link_to 'Leave', leave_event_path(@event) %> |
+<% elsif @event.waitlist_users.include? current_user %>
+  <%= link_to 'Leave waiting list', leave_waitlist_event_path(@event) %> |
 <% else %>
   <%= link_to 'Join', join_event_path(@event) %> |
 <% end %>

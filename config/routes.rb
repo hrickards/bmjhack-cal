@@ -3,6 +3,7 @@ Cal2::Application.routes.draw do
     member do
       get 'join'
       get 'leave'
+      get 'leave_waitlist'
     end
   end
 

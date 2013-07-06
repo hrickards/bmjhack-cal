@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130706133440) do
+ActiveRecord::Schema.define(version: 20130706145813) do
 
   create_table "appointments", force: true do |t|
     t.integer "user_id"
@@ -66,5 +66,11 @@ ActiveRecord::Schema.define(version: 20130706133440) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "waitlist_appointments", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "user_id"
+    t.datetime "timestamp"
+  end
 
 end

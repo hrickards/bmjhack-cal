@@ -43,19 +43,8 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    old_event = @event.attributes.clone
-
     respond_to do |format|
       if @event.update(event_params) and @event.tag_list = event_params[:tag_list] and @event.save
-        differences = {}
-        @event.attributes.each_pair do |key, val|
-          unless old_event[key] == val or key == "updated_at"
-            differences[key] = {old: old_event[key], new: val}
-          end
-        end
-        for user in @event.users do
-          UserMailer.changes_email(user, @event, differences).deliver
-        end
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else
@@ -81,7 +70,8 @@ class EventsController < ApplicationController
         @event.users.append(current_user)
         format.html { redirect_to @event, notice: 'Event successfully joined' }
       else
-        format.html { redirect_to @event, notice: 'Event over-subscribed' }
+        @event.waitlist_users.append(current_user)
+        format.html { redirect_to @event, notice: 'Event over-subscribed. You have been placed on a waiting list.' }
       end
     end
   end
@@ -91,6 +81,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.users.include? current_user
         @event.users.delete current_user
+        @event.check_waitlist
         format.html { redirect_to @event, notice: 'Event successfully left' }
       else
         format.html { redirect_to @event, notice: "You're not currently a member of this event" }
@@ -98,6 +89,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def leave_waitlist
+    @event = Event.find(params[:id])
+    respond_to do |format|
+      if @event.waitlist_users.include? current_user
+        @event.waitlist_users.delete current_user
+        format.html { redirect_to @event, notice: 'Event waiting list successfully left' }
+      else
+        format.html { redirect_to @event, notice: "You're not currently a member of this event's waiting list" }
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -8,4 +8,11 @@ class UserMailer < ActionMailer::Base
 
     mail to: @user.email, subject: 'Changes made to event'
   end
+
+  def off_waitlist_email(user, event)
+    @user = user
+    @event = event
+
+    mail to: @user.email, subject: 'Off waitlist for event'
+  end
 end
