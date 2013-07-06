@@ -43,8 +43,19 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    old_event = @event.attributes.clone
+
     respond_to do |format|
       if @event.update(event_params) and @event.tag_list = event_params[:tag_list] and @event.save
+        differences = {}
+        @event.attributes.each_pair do |key, val|
+          unless old_event[key] == val or key == "updated_at"
+            differences[key] = {old: old_event[key], new: val}
+          end
+        end
+        for user in @event.users do
+          UserMailer.changes_email(user, @event, differences).deliver
+        end
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else

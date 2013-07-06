@@ -1,0 +1,6 @@
+Changes have been made to <%= @event.title %>. The following modifications have been made:
+
+<% @differences.each_pair do |key, val| %>
+  <%= key %>: was "<%= val[:old] %>", now "<%= val[:new] %>"
+<% end %>
+Have a great day!
