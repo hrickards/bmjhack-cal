@@ -22,6 +22,16 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def color
+    if self.course_list.include? "Medical Student"
+      "red"
+    elsif self.course_list.include? "Nurse Student"
+      "green"
+    else
+      "blue"
+    end
+  end
+
   def duration=(val)
     self.end_datetime = self.start_datetime + val.to_i.minute
   end
