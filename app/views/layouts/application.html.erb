@@ -19,7 +19,7 @@
   <% end %>
 
   <div>
-    <%= link_to "Events", events_path %>
+    <%= link_to "Events", events_path %> | <%= link_to "iCal", calendar_path(current_user, :format => :ical) %>
   </div>
 
 <%= yield %>
