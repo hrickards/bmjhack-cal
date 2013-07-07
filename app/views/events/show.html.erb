@@ -22,7 +22,7 @@
     <h4>BMJ Resources:</h4>
     <ul>
       <% for datum in @bmj %>
-        <% pres_string = datum['authors'].nil? ? datum['title'] : "#{datum['title']}, #{datum['authors']}" %>
+        <% pres_string = (datum['authors'].nil? ? datum['title'] : "#{datum['title']}, #{datum['authors']}") + " (#{datum['publication']})" %>
         <li><%= link_to pres_string, datum['url'], target: '_blank' %></li>
       <% end %>
     </ul>
