@@ -1,6 +1,8 @@
 class Event < ActiveRecord::Base
   attr_accessible :title, :location, :teacher, :limit, :course, :year, :start_datetime, :end_datetime, :resources, :tags
 
+  validates :title, :limit, :start_datetime, :end_datetime, presence: :true
+
   has_many :appointments, dependent: :destroy
   has_many :users, through: :appointments
 
