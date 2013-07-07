@@ -37,6 +37,11 @@
     <%= f.label :year %><br>
     <%= f.select :year_list, YEARS.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
+  <div class="field">
+    <%= f.label :types %><br>
+    <%= f.select :type_list, TYPES.map{|x| [x,x]}, {}, {:multiple => true} %>
+  </div>
+
 
   <div class="field" id="start_datetime">
     <%= f.label :start_datetime %><br>

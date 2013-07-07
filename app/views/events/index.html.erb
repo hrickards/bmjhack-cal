@@ -14,6 +14,11 @@
     </div>
 
     <div class="field">
+      <%= label :event, :types %><br>
+      <%= select :event, :type_list, TYPES.map{|x| [x,x]}, {}, {:multiple => true} %>
+    </div>
+
+    <div class="field">
       <%= label :event, :year %><br>
       <%= select :event, :year_list, YEARS.map{|x| [x,x]}, {:selected => current_user.years}, {:multiple => true} %>
     </div>

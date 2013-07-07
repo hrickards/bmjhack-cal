@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :title, :location, :teacher, :limit, :course, :year, :start_datetime, :end_datetime, :resources, :tags, :duration
+  attr_accessible :title, :location, :teacher, :limit, :course, :year, :start_datetime, :end_datetime, :resources, :tags, :duration, :types, :keywords
 
   validates :title, :limit, :start_datetime, :end_datetime, presence: :true
 
@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   has_many :waitlist_appointments, dependent: :destroy
   has_many :waitlist_users, through: :waitlist_appointments, foreign_key: :event_id, class_name: :User
   
-  acts_as_taggable_on :tags, :course, :year
+  acts_as_taggable_on :tags, :course, :year, :types
 
   after_update :email_changes
   after_update :check_waitlist

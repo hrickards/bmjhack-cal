@@ -26,6 +26,10 @@ class EventsController < ApplicationController
     unless params[:tags].nil? or params[:tags].empty?
       @events = @events.tagged_with(params[:tags], :on => :tags, :any => true)
     end
+
+    unless params[:types].nil? or params[:types].empty?
+      @events = @events.tagged_with(params[:types], :on => :types, :any => true)
+    end
     
     @events = @events.all
 
@@ -58,6 +62,7 @@ class EventsController < ApplicationController
     @event.tag_list = event_params[:tag_list].reject { |x| x.empty? }
     @event.year_list = event_params[:year_list].reject { |x| x.empty? }
     @event.course_list = event_params[:course_list].reject { |x| x.empty? }
+    @event.type_list = event_params[:type_list].reject { |x| x.empty? }
     @event.save
 
     respond_to do |format|
@@ -77,6 +82,7 @@ class EventsController < ApplicationController
     @event.tag_list = event_params[:tag_list].reject { |x| x.empty? }
     @event.year_list = event_params[:year_list].reject { |x| x.empty? }
     @event.course_list = event_params[:course_list].reject { |x| x.empty? }
+    @event.type_list = event_params[:type_list].reject { |x| x.empty? }
     @event.save
     epara = event_params.clone
     epara['start_datetime'] = DateTime.strptime epara['start_datetime'], '%d/%m/%Y %H:%M:%S'

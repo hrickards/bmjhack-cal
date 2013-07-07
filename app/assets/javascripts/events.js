@@ -13,6 +13,7 @@ function loadPage() {
   window.courses = $('#event_course_list').val();
   window.years = $('#event_year_list').val();
   window.tags = $('#event_tag_list').val();
+  window.types = $('#event_type_list').val();
 
   $('#calendar').fullCalendar({
     aspectRatio: 1.28,
@@ -36,7 +37,8 @@ function loadPage() {
           end: end.toISOString(),
           courses: courses,
           years: years,
-          tags: tags
+          tags: tags,
+          types: types
         },
         success: function(doc) {
           callback(doc);
@@ -55,6 +57,10 @@ function loadPage() {
   });
   $('#event_tag_list').change(function() {
     tags = $(this).val();
+    filterResults();
+  });
+  $('#event_type_list').change(function() {
+    types = $(this).val();
     filterResults();
   });
 

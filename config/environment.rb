@@ -8,4 +8,5 @@ require 'yaml'
 consts = YAML.load_file 'config/filters.yaml'
 COURSES = consts['courses']
 YEARS = consts['years']
+TYPES = consts['types']
 TAGS = consts['tags']
