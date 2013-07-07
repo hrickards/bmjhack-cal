@@ -4,13 +4,13 @@
   <%= devise_error_messages! %>
 
   <div>
-    <%= f.label :course %><br />
-    <%= f.select :course, COURSES.map{|x| [x,x]} %>
+    <%= f.label :courses %><br />
+    <%= f.select :courses, COURSES.map{|x| [x,x]}, {}, {multiple: true} %>
   </div>
 
   <div>
-    <%= f.label :year %><br />
-    <%= f.select :year, YEARS.map{|x| [x,x]} %>
+    <%= f.label :years %><br />
+    <%= f.select :years, YEARS.map{|x| [x,x]}, {}, {multiple: true} %>
   </div>
 
   <div>

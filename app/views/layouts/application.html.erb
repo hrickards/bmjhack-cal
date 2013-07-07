@@ -18,9 +18,11 @@
     <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
   <% end %>
 
-  <div>
-    <%= link_to "Events", events_path %> | <%= link_to "iCal", calendar_path(current_user, :format => :ical) %>
-  </div>
+  <% if current_user %>
+    <div>
+      <%= link_to "Events", events_path %> | <%= link_to "iCal", calendar_path(current_user, :format => :ical) %>
+    </div>
+  <% end %>
 
 <%= yield %>
 

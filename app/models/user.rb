@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:google_oauth2]
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :course, :year, :administrator
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :administrator, :courses, :years
 
   has_many :appointments, dependent: :destroy
   has_many :events, through: :appointments
@@ -17,5 +17,21 @@ class User < ActiveRecord::Base
   def self.find_oauth_user(access_token, signed_in_resource=nil)
     data = access_token.info
     User.where(:email => data["email"]).first
+  end
+
+  def courses
+    self[:courses].nil? ? [] : self[:courses].split(",")
+  end
+
+  def years
+    self[:years].nil? ? [] : self[:years].split(",")
+  end
+
+  def courses=(value)
+    self[:courses] = value.join(",")
+  end
+
+  def years=(value)
+    self[:years] = value.join(",")
   end
 end
