@@ -25,7 +25,7 @@
   </div>
   <div class="field">
     <%= f.label :limit %><br>
-    <%= f.number_field :limit %>
+    <%= f.number_field :limit, {min:0} %>
   </div>
 
   <div class="field">

@@ -1,0 +1,30 @@
+<p>
+Hi <%= @user.name.split.first %>,
+</p>
+
+<p>
+<i><%= @event.title %></i> has recently been modified. The following changes have been made:
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <td></td>
+      <td>Old</td>
+      <td>New</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @differences.each_pair do |key, val| %>
+      <tr>
+        <td><%= key.capitalize %></td>
+        <td><%= val[:old] %></td>
+        <td><%= val[:new] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+Have a great day!
+</p>

@@ -42,10 +42,10 @@ class Event < ActiveRecord::Base
 
   private
   def get_changes
-    old_attributes = {'title'=>self.title_was, 'location'=>self.location_was, 'teacher'=>self.teacher_was, 'limit'=>self.limit_was, 'course'=>self.course_was, 'year'=>self.year_was, 'start_datetime'=>self.start_datetime_was, 'end_datetime'=>self.end_datetime_was, 'resources'=>self.resources_was, 'tags'=>self.tags_was}
+    old_attributes = {'title'=>self.title_was, 'location'=>self.location_was, 'teacher'=>self.teacher_was, 'start_datetime'=>self.start_datetime_was, 'end_datetime'=>self.end_datetime_was, 'resources'=>self.resources_was}
     changes = {}
     self.attributes.each_pair do |key, val|
-      unless old_attributes[key] == val or key == "created_at" or key == "updated_at" or key == "id"
+      unless old_attributes[key] == val or key == "created_at" or key == "updated_at" or key == "id" or not old_attributes.include? (key)
         changes[key] = {old: old_attributes[key], new: val}
       end
     end
@@ -53,8 +53,11 @@ class Event < ActiveRecord::Base
   end
 
   def email_changes
-    for user in self.users do
-      UserMailer.changes_email(user, self, get_changes).deliver
+    changes = get_changes
+    unless changes.empty?
+      for user in self.users do
+        UserMailer.changes_email(user, self, changes).deliver
+      end
     end
   end
 end
