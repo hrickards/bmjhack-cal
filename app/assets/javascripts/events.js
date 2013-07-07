@@ -44,6 +44,10 @@ function loadPage() {
   }
 
   $("#event_resources").markItUp(mySettings);
+
+  $('#start_datetime').datetimepicker({
+    language: 'en'
+  });
 }
 
 document.addEventListener("page:load", loadPage);

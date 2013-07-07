@@ -37,13 +37,16 @@
     <%= f.select :year_list, YEARS.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
 
-  <div class="field">
+  <div class="field" id="start_datetime">
     <%= f.label :start_datetime %><br>
-    <%= f.datetime_select :start_datetime %>
+    <input data-format='dd/MM/yyyy hh:mm:ss' id="event_start_datetime" name="event[start_datetime]" type="datetime" value="<%=(@event.start_datetime || DateTime.now).strftime('%d/%m/%Y %H:%M:%S')%>">
+    <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i>
+    </span>
   </div>
   <div class="field">
-    <%= f.label :end_datetime %><br>
-    <%= f.datetime_select :end_datetime %>
+    <%= f.label :duration %><br>
+    <%= f.number_field :duration, {min:0} %>
   </div>
 
   <div class="field">

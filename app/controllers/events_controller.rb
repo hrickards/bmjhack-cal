@@ -76,8 +76,10 @@ class EventsController < ApplicationController
     @event.year_list = event_params[:year_list].reject { |x| x.empty? }
     @event.course_list = event_params[:course_list].reject { |x| x.empty? }
     @event.save
+    epara = event_params.clone
+    epara['start_datetime'] = DateTime.strptime epara['start_datetime'], '%d/%m/%Y %H:%M:%S'
     respond_to do |format|
-      if @event.update(event_params)
+      if @event.update(epara)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { head :no_content }
       else

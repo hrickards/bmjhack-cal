@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  attr_accessible :title, :location, :teacher, :limit, :course, :year, :start_datetime, :end_datetime, :resources, :tags
+  attr_accessible :title, :location, :teacher, :limit, :course, :year, :start_datetime, :end_datetime, :resources, :tags, :duration
 
   validates :title, :limit, :start_datetime, :end_datetime, presence: :true
 
@@ -13,6 +13,18 @@ class Event < ActiveRecord::Base
 
   after_update :email_changes
   after_update :check_waitlist
+
+  def duration
+    unless self.end_datetime.nil? or self.start_datetime.nil?
+      (self.end_datetime - self.start_datetime).to_i / 1.minute
+    else
+      30
+    end
+  end
+
+  def duration=(val)
+    self.end_datetime = self.start_datetime + val.to_i.minute
+  end
 
   def check_waitlist
     if self.users.count < self.limit and self.waitlist_users.count > 0
