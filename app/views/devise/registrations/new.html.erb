@@ -13,6 +13,11 @@
     <%= f.select :year, YEARS.map{|x| [x,x]} %>
   </div>
 
+  <div>
+    <%= f.label :administrator %><br />
+    <%= f.check_box :administrator %>
+  </div>
+
   <% @data = session["devise.google_data"].info %>
   <%= f.hidden_field :name, :value => @data["name"] %>
   <%= f.hidden_field :email, :value => @data["email"] %>
