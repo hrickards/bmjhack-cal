@@ -1,4 +1,6 @@
 //= require fullcalendar
+//= require jquery.markitup
+//= require set
 
 function loadPage() {
   window.courses = $('#event_course_list').val();
@@ -40,6 +42,8 @@ function loadPage() {
   function filterResults() {
     $('#calendar').fullCalendar('refetchEvents');
   }
+
+  $("#event_resources").markItUp(mySettings);
 }
 
 document.addEventListener("page:load", loadPage);

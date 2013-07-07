@@ -19,7 +19,7 @@
 <p> <strong>Start:</strong> <%= @event.start_datetime %> </p>
 <p> <strong>End:</strong> <%= @event.end_datetime %> </p>
 
-<p> <strong>Resources:</strong> <%= @event.resources %> </p>
+<p> <strong>Resources:</strong> <%= @event.resources.html_safe %> </p>
 <p> <strong>Tags:</strong> <%= intersperse @event.tags, "," %> </p>
 
 <% if current_user.administrator? and @event.users.count > 0 %>
