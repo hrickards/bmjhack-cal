@@ -17,8 +17,15 @@
     <h4>Location: <%= @event.location %></h4>
     <h4>Teacher: <%= @event.teacher %></h4>
     <h4>No. spaces left: <%= @event.no_remaining_spaces %></h4>
-    <h4>Info & resources:</h4>
+    <h4>Info:</h4>
     <h5><%= @event.resources.html_safe %></h5>
+    <h4>BMJ Resources:</h4>
+    <ul>
+      <% for datum in @bmj %>
+        <% pres_string = datum['authors'].nil? ? datum['title'] : "#{datum['title']}, #{datum['authors']}" %>
+        <li><%= link_to pres_string, datum['url'], target: '_blank' %></li>
+      <% end %>
+    </ul>
 
     <% if current_user.administrator? and @event.users.count > 0 %>
       <p>

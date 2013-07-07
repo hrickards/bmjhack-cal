@@ -58,6 +58,15 @@ class Event < ActiveRecord::Base
     e
   end
 
+  def get_bmj_data
+    results = []
+    self.tags.each do |tag|
+      json = Typhoeus.get "morelikethis.bmj.com/javasim/morelikethis-text.do", params: {index: :corpusIndexExpanded4, text: tag.name, excl: ''}
+      results += JSON.parse json.response_body
+    end
+    results
+  end
+
   private
   def get_changes
     old_attributes = {'title'=>self.title_was, 'location'=>self.location_was, 'teacher'=>self.teacher_was, 'start_datetime'=>self.start_datetime_was, 'end_datetime'=>self.end_datetime_was, 'resources'=>self.resources_was}

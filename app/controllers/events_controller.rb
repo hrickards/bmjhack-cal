@@ -38,6 +38,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @bmj = @event.get_bmj_data
   end
 
   # GET /events/new
