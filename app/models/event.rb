@@ -36,6 +36,10 @@ class Event < ActiveRecord::Base
     self.end_datetime = self.start_datetime + val.to_i.minute
   end
 
+  def keywords
+    self['keywords'].split ","
+  end
+
   def no_remaining_spaces
     self.limit - self.users.count
   end
@@ -70,8 +74,8 @@ class Event < ActiveRecord::Base
 
   def get_bmj_data
     results = []
-    self.tags.each do |tag|
-      json = Typhoeus.get "morelikethis.bmj.com/javasim/morelikethis-text.do", params: {index: :corpusIndexExpanded4, text: tag.name, excl: ''}
+    self.keywords.each do |tag|
+      json = Typhoeus.get "morelikethis.bmj.com/javasim/morelikethis-text.do", params: {index: :corpusIndexExpanded4, text: tag, excl: ''}
       results += JSON.parse json.response_body
     end
     results

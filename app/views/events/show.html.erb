@@ -38,6 +38,9 @@
       </p>
     <% end %>
 
+    <p>
+    <strong>Tags:</strong> <%= @event.keywords.join ", " %>
+
     <div id="buttons_container">
       <% if @event.users.include? current_user %>
         <%= button_to 'Leave', leave_event_path(@event), :method => :get, :class => :hbutton %>

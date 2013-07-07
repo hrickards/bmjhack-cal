@@ -13,58 +13,62 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
   <div class="field">
-    <%= f.label :location %><br>
+    <%= f.label :location %>
     <%= f.text_field :location %>
   </div>
   <div class="field">
-    <%= f.label :teacher %><br>
+    <%= f.label :teacher %>
     <%= f.text_field :teacher %>
   </div>
   <div class="field">
-    <%= f.label :limit %><br>
+    <%= f.label :limit %>
     <%= f.number_field :limit, {min:0} %>
   </div>
 
   <div class="field">
-    <%= f.label :course %><br>
+    <%= f.label :course %>
     <%= f.select :course_list, COURSES.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
   <div class="field">
-    <%= f.label :year %><br>
+    <%= f.label :year %>
     <%= f.select :year_list, YEARS.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
   <div class="field">
-    <%= f.label :types %><br>
+    <%= f.label :types %>
     <%= f.select :type_list, TYPES.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
 
 
   <div class="field" id="start_datetime">
-    <%= f.label :start_datetime %><br>
+    <%= f.label :start_datetime %>
     <input data-format='dd/MM/yyyy hh:mm:ss' id="event_start_datetime" name="event[start_datetime]" type="datetime" value="<%=(@event.start_datetime || DateTime.now).strftime('%d/%m/%Y %H:%M:%S')%>">
     <span class="add-on">
       <i data-time-icon="icon-time" data-date-icon="icon-calendar"> </i>
     </span>
   </div>
   <div class="field">
-    <%= f.label :duration %><br>
+    <%= f.label :duration %>
     <%= f.number_field :duration, {min:0} %>
   </div>
 
   <div class="field">
-    <%= f.label :resources %><br>
+    <%= f.label :resources %>
     <%= f.text_area :resources %>
   </div>
 
   <div class="field">
-    <%= f.label :specialties %><br>
+    <%= f.label :specialties %>
     <%= f.select :tag_list, TAGS.map{|x| [x,x]}, {}, {:multiple => true} %>
   </div>
 
+  <div class="field">
+    <%= f.label :keywords %>
+    <%= f.text_field :keywords %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

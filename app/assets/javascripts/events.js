@@ -2,6 +2,8 @@
 //= require jquery.markitup
 //= require set
 //= require strftime
+//= require jquery.ui.all
+//= require tag-it
 
 
 function formatStart(datestring) {
@@ -73,6 +75,8 @@ function loadPage() {
   $('#start_datetime').datetimepicker({
     language: 'en'
   });
+
+  $("#event_keywords").tagit();
 }
 
 document.addEventListener("page:load", loadPage);
