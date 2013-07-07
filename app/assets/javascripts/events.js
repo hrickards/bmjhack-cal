@@ -1,6 +1,6 @@
 //= require fullcalendar
 
-$(document).ready(function() {
+document.addEventListener("page:load", function() {
   window.courses = $('#event_course_list').val();
   window.years = $('#event_year_list').val();
   window.tags = $('#event_tag_list').val();

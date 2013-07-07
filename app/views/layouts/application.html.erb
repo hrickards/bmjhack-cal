@@ -18,6 +18,10 @@
     <%= link_to "Sign in with Google", user_omniauth_authorize_path(:google_oauth2) %>
   <% end %>
 
+  <div>
+    <%= link_to "Events", events_path %>
+  </div>
+
 <%= yield %>
 
 </body>
