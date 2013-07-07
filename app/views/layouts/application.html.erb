@@ -22,7 +22,7 @@
           <li><%= link_to "iCal", calendar_path(current_user, :format => :ical) %></li>
           <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
         <% else %>
-          <li><%= link_to "Sign in", user_omniauth_authorize_path(:google_oauth2) %></li>
+          <li><%= link_to "Sign in/up", user_omniauth_authorize_path(:google_oauth2) %></li>
         <% end %>
       </ul>
     </div>
