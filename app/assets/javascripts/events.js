@@ -8,6 +8,7 @@ function loadPage() {
   window.tags = $('#event_tag_list').val();
 
   $('#calendar').fullCalendar({
+    aspectRatio: 1.28,
     events: function(start, end, callback) {
       $.ajax({
         url: 'events.json',

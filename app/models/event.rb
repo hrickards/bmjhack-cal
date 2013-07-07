@@ -26,6 +26,10 @@ class Event < ActiveRecord::Base
     self.end_datetime = self.start_datetime + val.to_i.minute
   end
 
+  def no_remaining_spaces
+    self.limit - self.users.count
+  end
+
   def check_waitlist
     if self.users.count < self.limit and self.waitlist_users.count > 0
       user = self.waitlist_users.find(:all, :order => "timestamp ASC").first

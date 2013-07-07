@@ -1,23 +1,37 @@
 <% if current_user.administrator? %>
-  <%= link_to 'New Event', new_event_path %>
+  <%= button_to 'New Event', new_event_path, :method => :get, :class => :btn, :id => :new_event_button %>
 <% end %>
 
-<div id="filter">
-  <div class="field">
-    <%= label :event, :course %><br>
-    <%= select :event, :course_list, COURSES.map{|x| [x,x]}, {:selected => current_user.courses}, {:multiple => true} %>
-  </div>
+<div id="filters_container">
+  <div id="filters">
+    <div id="filter_title">
+      <h2>Filter by:</h2>
+    </div>
 
-  <div class="field">
-    <%= label :event, :year %><br>
-    <%= select :event, :year_list, YEARS.map{|x| [x,x]}, {:selected => current_user.years}, {:multiple => true} %>
-  </div>
+    <div class="field">
+      <%= label :event, :course %><br>
+      <%= select :event, :course_list, COURSES.map{|x| [x,x]}, {:selected => current_user.courses}, {:multiple => true} %>
+    </div>
 
-  <div class="field">
-    <%= label :event, :tags %><br>
-    <%= select :event, :tag_list, TAGS.map{|x| [x,x]}, {}, {:multiple => true} %>
+    <div class="field">
+      <%= label :event, :year %><br>
+      <%= select :event, :year_list, YEARS.map{|x| [x,x]}, {:selected => current_user.years}, {:multiple => true} %>
+    </div>
+
+    <div class="field">
+      <%= label :event, :tags %><br>
+      <%= select :event, :tag_list, TAGS.map{|x| [x,x]}, {}, {:multiple => true} %>
+    </div>
   </div>
 </div>
 
 <div id="calendar">
+</div>
+
+<div class="right_hand_box">
+  Condensed details
+</div>
+
+<div class="right_hand_box">
+  Events coming up
 </div>

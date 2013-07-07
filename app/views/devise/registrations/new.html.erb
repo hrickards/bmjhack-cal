@@ -1,20 +1,21 @@
+<div id="details">
 <h2>Sign up</h2>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div>
-    <%= f.label :courses %><br />
+  <div class="field">
+    <%= f.label :courses %>
     <%= f.select :courses, COURSES.map{|x| [x,x]}, {}, {multiple: true} %>
   </div>
 
-  <div>
-    <%= f.label :years %><br />
+  <div class="field">
+    <%= f.label :years %>
     <%= f.select :years, YEARS.map{|x| [x,x]}, {}, {multiple: true} %>
   </div>
 
-  <div>
-    <%= f.label :administrator %><br />
+  <div class="field">
+    <%= f.label :administrator %>
     <%= f.check_box :administrator %>
   </div>
 
@@ -25,3 +26,4 @@
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>
+</div>

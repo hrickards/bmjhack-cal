@@ -1,48 +1,49 @@
-<% if @event.users.include? current_user %>
-  <p>
-    You are attending this event
-  </p>
-<% elsif @event.waitlist_users.include? current_user %>
-  <p>
-    You are on the waiting list to attend this event
-  </p>
-<% end %>
+<div id="event">
+  <br>
+  <div id="left"><h2><%= @event.title %></h2></div>
+  <div id="start_time"><h4>Start Time: <%= @event.start_datetime.strftime("%b %d, %H:%m") %></h4></div>
+  <div id="duration"><h4>Duration: <%= @event.duration %> mins</h4></div>
 
-<p> <strong>Title:</strong> <%= @event.title %> </p>
-<p> <strong>Location:</strong> <%= @event.location %> </p>
-<p> <strong>Teacher:</strong> <%= @event.teacher %> </p>
-<p> <strong>Limit:</strong> <%= @event.limit %> </p>
+  <div id="details">
+    <% if @event.users.include? current_user %>
+      <p>
+        You are attending this event
+      </p>
+    <% elsif @event.waitlist_users.include? current_user %>
+      <p>
+        You are on the waiting list to attend this event
+      </p>
+    <% end %>
+    <h4>Location: <%= @event.location %></h4>
+    <h4>Teacher: <%= @event.teacher %></h4>
+    <h4>No. spaces left: <%= @event.no_remaining_spaces %></h4>
+    <h4>Info & resources:</h4>
+    <h5><%= @event.resources.html_safe %></h5>
 
-<p> <strong>Courses:</strong> <%= intersperse @event.course, "," %> </p>
-<p> <strong>Years:</strong> <%= intersperse @event.year, "," %> </p>
+    <% if current_user.administrator? and @event.users.count > 0 %>
+      <p>
+        <strong>Students (<%= @event.users.count %>):</strong>
+        <ul>
+          <% @event.users.each do |user| %>
+            <li><%= user.name %></li>
+          <% end %>
+        </ul>
+      </p>
+    <% end %>
 
-<p> <strong>Start:</strong> <%= @event.start_datetime %> </p>
-<p> <strong>End:</strong> <%= @event.end_datetime %> </p>
-<p> <strong>Duration:</strong> <%= @event.duration %> minutes</p>
-
-<p> <strong>Resources:</strong> <%= @event.resources.html_safe %> </p>
-<p> <strong>Tags:</strong> <%= intersperse @event.tags, "," %> </p>
-
-<% if current_user.administrator? and @event.users.count > 0 %>
-  <p>
-    <strong>Students (<%= @event.users.count %>):</strong>
-    <ul>
-      <% @event.users.each do |user| %>
-        <li><%= user.name %></li>
+    <div id="buttons_container">
+      <% if @event.users.include? current_user %>
+        <%= button_to 'Leave', leave_event_path(@event), :method => :get, :class => :hbutton %>
+      <% elsif @event.waitlist_users.include? current_user %>
+        <%= button_to 'Leave waiting list', leave_waitlist_event_path(@event), :method => :get, :class => :hbutton %>
+      <% else %>
+        <%= button_to 'Join', join_event_path(@event), :method => :get, :class => :hbutton, :class => :hbutton %>
       <% end %>
-    </ul>
-  </p>
-<% end %>
-
-<% if @event.users.include? current_user %>
-  <%= link_to 'Leave', leave_event_path(@event) %> |
-<% elsif @event.waitlist_users.include? current_user %>
-  <%= link_to 'Leave waiting list', leave_waitlist_event_path(@event) %> |
-<% else %>
-  <%= link_to 'Join', join_event_path(@event) %> |
-<% end %>
-<% if current_user.administrator? %>
-  <%= link_to 'Edit', edit_event_path(@event) %> |
-  <%= link_to 'Email group', email_group_event_path(@event) %> |
-<% end %>
-<%= link_to 'Back', events_path %>
+      <% if current_user.administrator? %>
+        <%= button_to 'Edit', edit_event_path(@event), :method => :get, :class => :hbutton %>
+        <%= button_to 'Email group', email_group_event_path(@event), :method => :get, :class => :hbutton %>
+      <% end %>
+      <%= button_to 'Back', events_path, :method => :get, :class => :hbutton %>
+  </div>
+  </div>
+</div>
