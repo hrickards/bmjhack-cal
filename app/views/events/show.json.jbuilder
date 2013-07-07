@@ -1,1 +1,2 @@
-json.extract! @event, :title, :description, :limit, :date, :created_at, :updated_at
+json.extract! @event, :title, :location, :teacher, :no_remaining_spaces, :duration
+json.start @event.start_datetime.iso8601

@@ -9,6 +9,17 @@ function loadPage() {
 
   $('#calendar').fullCalendar({
     aspectRatio: 1.28,
+    eventMouseover: function(event, jsEvent, view) {
+      $.ajax({
+        url: 'event.json',
+        dataType: 'json',
+        data: { id: event['id'] },
+        success: function(doc) {
+          var html = "<h4>" + doc['title'] + "</h4><h5>" + doc['start'] + "</h5><h5>" + doc['duration'] + " minutes</h5><h6>" + doc['teacher'] + ", " + doc['location'] + "</h6><h6>" + doc['no_remaining_spaces'] + " remaining spaces</h6>";
+          $('#event_details').html(html);
+        }
+      });
+    },
     events: function(start, end, callback) {
       $.ajax({
         url: 'events.json',

@@ -28,10 +28,16 @@
 <div id="calendar">
 </div>
 
-<div class="right_hand_box">
-  Condensed details
+<div class="right_hand_box" id="event_details">
+  Mouseover an event to view details
 </div>
 
-<div class="right_hand_box">
-  Events coming up
+<div class="right_hand_box" id="your_events">
+  <h4>Your upcoming sessions:</h4>
+  <ul>
+    <% @your_events.each do |event| %>
+      <% event_string = "#{event['title']}, #{event['start_datetime']}" %>
+      <li><%= link_to event_string, event_path(event) %></li>
+    <% end %>
+  </ul>
 </div>

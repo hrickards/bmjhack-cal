@@ -15,6 +15,7 @@ Cal2::Application.routes.draw do
   end
 
   get "/users/:id/calendar" => "user#calendar", as: :calendar
+  get "/event" => "events#show"
   root :to => "home#index"
 
   # The priority is based upon order of creation: first created -> highest priority.

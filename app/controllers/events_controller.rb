@@ -7,6 +7,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    @your_events = current_user.events
 
     unless params[:start].nil? or params[:start].empty? or params[:end].nil? or params[:end].empty?
       start_datetime = Time.iso8601(params[:start])
