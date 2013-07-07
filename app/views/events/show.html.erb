@@ -22,6 +22,17 @@
 <p> <strong>Resources:</strong> <%= @event.resources %> </p>
 <p> <strong>Tags:</strong> <%= intersperse @event.tags, "," %> </p>
 
+<% if current_user.administrator? and @event.users.count > 0 %>
+  <p>
+    <strong>Students (<%= @event.users.count %>):</strong>
+    <ul>
+      <% @event.users.each do |user| %>
+        <li><%= user.name %></li>
+      <% end %>
+    </ul>
+  </p>
+<% end %>
+
 <% if @event.users.include? current_user %>
   <%= link_to 'Leave', leave_event_path(@event) %> |
 <% elsif @event.waitlist_users.include? current_user %>
@@ -31,5 +42,6 @@
 <% end %>
 <% if current_user.administrator? %>
   <%= link_to 'Edit', edit_event_path(@event) %> |
+  <%= link_to 'Email group', email_group_event_path(@event) %> |
 <% end %>
 <%= link_to 'Back', events_path %>

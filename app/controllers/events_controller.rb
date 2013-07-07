@@ -134,6 +134,18 @@ class EventsController < ApplicationController
     end
   end
 
+  def email_group
+    @event = Event.find params[:id]
+  end
+
+  def send_email_group
+    @event = Event.find params[:id]
+    @event.send_email_group params[:subject], params[:body]
+
+    flash[:notice] = 'Email successfully sent.'
+    redirect_to @event
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event

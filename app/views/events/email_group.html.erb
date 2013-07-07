@@ -1,0 +1,13 @@
+<%= form_tag send_email_group_event_path(@event) do %>
+  <div class="field">
+    <%= label_tag :subject %><br>
+    <%= text_field_tag :subject %>
+  </div>
+  <div class="field">
+    <%= label_tag :body %><br>
+    <%= text_area_tag :body %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Send" %>
+  </div>
+<% end %>

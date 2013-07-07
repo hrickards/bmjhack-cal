@@ -21,6 +21,12 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def send_email_group(subject, message)
+    self.users.each do |user|
+      UserMailer.send_email_group(user, subject, message).deliver
+    end
+  end
+
   #http://murmurinfo.wordpress.com/2010/11/26/ical-support-for-rails/
   def ical
     e = Icalendar::Event.new

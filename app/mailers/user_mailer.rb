@@ -15,4 +15,12 @@ class UserMailer < ActionMailer::Base
 
     mail to: @user.email, subject: 'Off waitlist for event'
   end
+
+  def send_email_group(user, subject, message)
+    @user = user
+    @subject = subject
+    @message = message
+
+    mail to: @user.email, subject: @subject
+  end
 end

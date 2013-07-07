@@ -4,6 +4,8 @@ Cal2::Application.routes.draw do
       get 'join'
       get 'leave'
       get 'leave_waitlist'
+      get 'email_group'
+      post 'send_email_group'
     end
   end
 
