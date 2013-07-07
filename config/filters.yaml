@@ -1,6 +1,9 @@
 courses:
-  - Medic
-  - Nurse
+  - Medical Student
+  - Nurse Student
+  - Physio
+  - Occupational Therapist
+  - SALT
 
 years:
   - One
@@ -9,6 +12,27 @@ years:
   - Four
   - Five
 
+types:
+  - Clinic
+  - Tutorial
+  - Lecture
+  - Ward Based Teaching
+  - Theatre List
+  - Other
+
 tags:
-  - Dysrythmias
+  - Paediatrics
   - Cardiovascular
+  - Surgery
+  - Haematology
+  - Respiratory
+  - Orthopaedics
+  - Renal Medicine
+  - Urology
+  - Acute
+  - Anaesthetics
+  - Rheumatology
+  - Geriatrics
+  - Neurology
+  - Oncology
+  - Radiology
