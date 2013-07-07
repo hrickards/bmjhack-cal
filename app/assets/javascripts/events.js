@@ -1,6 +1,13 @@
 //= require fullcalendar
 //= require jquery.markitup
 //= require set
+//= require strftime
+
+
+function formatStart(datestring) {
+  var date = new Date(datestring);
+  return date.strftime("%b %d, %H:%m");
+}
 
 function loadPage() {
   window.courses = $('#event_course_list').val();
@@ -15,7 +22,7 @@ function loadPage() {
         dataType: 'json',
         data: { id: event['id'] },
         success: function(doc) {
-          var html = "<h4>" + doc['title'] + "</h4><h5>" + doc['start'] + "</h5><h5>" + doc['duration'] + " minutes</h5><h6>" + doc['teacher'] + ", " + doc['location'] + "</h6><h6>" + doc['no_remaining_spaces'] + " remaining spaces</h6>";
+          var html = "<h4>" + doc['title'] + "</h4><h5>" + formatStart(doc['start']) + "</h5><h5>" + doc['duration'] + " minutes</h5><h6>" + doc['teacher'] + ", " + doc['location'] + "</h6><h6>" + doc['no_remaining_spaces'] + " remaining spaces</h6>";
           $('#event_details').html(html);
         }
       });
